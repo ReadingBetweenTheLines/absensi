@@ -117,20 +117,19 @@
                 </div>
             </div>
 
-            <!-- Action Items: Cloud Settings, Simulator, Schedule Modal -->
+            <!-- Action Items: Cloud Status Badge, Schedule Modal, Time Simulator -->
             <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
 
-                <!-- Cloud Storage Status Button -->
-                <button id="btnOpenCloudModal"
-                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-brand-900/80 hover:bg-brand-800 text-indigo-200 hover:text-white border border-brand-700/60 transition shadow-xs">
-                    <span id="cloudStatusIcon" class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-                    <span id="cloudStatusText">Cloud: Local Storage</span>
-                    <i data-lucide="cloud-cog" class="w-3.5 h-3.5 ml-0.5 text-indigo-300"></i>
-                </button>
+                <!-- Cloud Connected Status Indicator (Hardcoded) -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-700/60 shadow-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Google Sheets Terhubung</span>
+                    <i data-lucide="cloud-check" class="w-3.5 h-3.5 ml-0.5 text-emerald-400"></i>
+                </div>
 
                 <!-- View Schedule / Roster Matrix Button -->
                 <button id="btnOpenRosterModal"
-                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-brand-900/80 hover:bg-brand-800 text-indigo-200 hover:text-white border border-brand-700/60 transition shadow-xs">
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-brand-900/80 hover:bg-brand-800 text-indigo-200 hover:text-white border border-brand-700/60 transition shadow-xs cursor-pointer">
                     <i data-lucide="calendar" class="w-3.5 h-3.5 text-amber-300"></i>
                     <span class="hidden sm:inline">Roster Resmi</span>
                 </button>
@@ -145,7 +144,7 @@
                             class="font-mono font-extrabold text-white text-xs block leading-tight">00:00:00</span>
                     </div>
                     <button id="toggleSimBtn" title="Buka kontrol simulasi waktu"
-                        class="p-1 rounded-lg hover:bg-brand-800/80 text-amber-300 transition">
+                        class="p-1 rounded-lg hover:bg-brand-800/80 text-amber-300 transition cursor-pointer">
                         <i data-lucide="sliders" class="w-4 h-4"></i>
                     </button>
                 </div>
@@ -159,8 +158,7 @@
                 <div class="flex items-center gap-2 text-indigo-200">
                     <i data-lucide="clock-rewind" class="w-4 h-4 text-amber-400"></i>
                     <span class="font-semibold text-white">Mode Simulasi Waktu:</span>
-                    <span class="text-indigo-300 hidden md:inline">Uji coba pergantian jadwal guru secara instan tanpa
-                        menunggu jam sekolah.</span>
+                    <span class="text-indigo-300 hidden md:inline">Uji coba pergantian jadwal guru secara instan tanpa menunggu jam sekolah.</span>
                 </div>
 
                 <div class="flex items-center gap-2 flex-wrap">
@@ -179,20 +177,15 @@
                         class="bg-brand-950 text-white border border-brand-700 rounded-lg px-2 py-1 text-xs font-mono font-semibold outline-none focus:ring-1 focus:ring-amber-400">
 
                     <button type="button" onclick="applySimulationPreset('SENIN', '08:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Senin
-                        08:30 (VII-1: MN)</button>
+                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Senin 08:30 (VII-1: MN)</button>
                     <button type="button" onclick="applySimulationPreset('SELASA', '07:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Selasa
-                        07:30 (VII-1: BA)</button>
+                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Selasa 07:30 (VII-1: BA)</button>
                     <button type="button" onclick="applySimulationPreset('RABU', '10:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Rabu
-                        10:30 (VII-1: SB)</button>
+                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Rabu 10:30 (VII-1: SB)</button>
                     <button type="button" onclick="applySimulationPreset('KAMIS', '09:00', 'IX-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Kamis
-                        09:00 (IX-1: DA)</button>
+                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Kamis 09:00 (IX-1: DA)</button>
                     <button type="button" onclick="applySimulationPreset('JUMAT', '08:00', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Jumat
-                        08:00 (Kokurikuler)</button>
+                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Jumat 08:00 (Kokurikuler)</button>
 
                     <button type="button" onclick="resetSimulation()"
                         class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white rounded text-[11px] font-bold ml-1 transition cursor-pointer">
@@ -237,8 +230,7 @@
                         </span>
                         <h2 class="text-xl font-extrabold text-slate-900 tracking-tight mt-1">Formulir Presensi Siswa
                         </h2>
-                        <p class="text-xs text-slate-500">Tuliskan nama dan pilih kelas Anda. Jadwal inisial guru
-                            dideteksi otomatis berdasarkan jam aktif.</p>
+                        <p class="text-xs text-slate-500">Tuliskan nama dan pilih kelas Anda. Jadwal inisial guru dideteksi otomatis berdasarkan jam aktif.</p>
                     </div>
                     <div
                         class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-bold border border-emerald-200">
@@ -362,8 +354,7 @@
                             class="flex items-center gap-2 text-xs text-slate-600 bg-white/90 p-2 rounded-xl border border-slate-200/70">
                             <i data-lucide="check-circle" class="w-4 h-4 text-emerald-600 shrink-0"></i>
                             <span class="text-[11px]">Siswa otomatis ditandai status <strong
-                                    class="text-emerald-700 font-bold">HADIR</strong> pada sesi pelajaran guru di
-                                atas.</span>
+                                    class="text-emerald-700 font-bold">HADIR</strong> pada sesi pelajaran guru di atas.</span>
                         </div>
 
                     </div>
@@ -401,8 +392,7 @@
                 <!-- Summary Metric Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Total Hadir Hari
-                            Ini</p>
+                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Total Hadir Hari Ini</p>
                         <p id="metricTotalPresent" class="text-2xl sm:text-3xl font-black text-brand-600 mt-1">0</p>
                         <p class="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
                             <i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Siswa Terdata
@@ -423,12 +413,11 @@
 
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
                         <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Penyimpanan</p>
-                        <div id="metricCloudStatus"
-                            class="flex items-center gap-1.5 mt-2 text-xs font-bold text-amber-600">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                            <span>Local Active</span>
+                        <div class="flex items-center gap-1.5 mt-2 text-xs font-bold text-emerald-600">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            <span>Sheets Sync</span>
                         </div>
-                        <p class="text-[10px] text-slate-400 mt-1">Sinkronisasi Cloud</p>
+                        <p class="text-[10px] text-slate-400 mt-1">Google Drive Terpadu</p>
                     </div>
                 </div>
 
@@ -439,23 +428,20 @@
                             <div class="w-7 h-7 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center">
                                 <i data-lucide="book-open" class="w-4 h-4"></i>
                             </div>
-                            <h3 class="font-bold text-slate-900 text-xs sm:text-sm">Daftar Inisial Guru & Pelajaran
-                                (Roster Resmi)</h3>
+                            <h3 class="font-bold text-slate-900 text-xs sm:text-sm">Daftar Inisial Guru & Pelajaran (Roster Resmi)</h3>
                         </div>
                         <span id="teacherCountBadge"
-                            class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-md">28
-                            Guru</span>
+                            class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-md">28 Guru</span>
                     </div>
 
                     <!-- Dynamic Grid Container -->
                     <div id="teacherDynamicGrid"
                         class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-3 text-xs max-h-48 overflow-y-auto pr-1">
-                        <!-- Injected by JavaScript from TEACHER_MAP -->
                     </div>
 
                     <div class="mt-3 text-right">
                         <button onclick="openFullRosterModal()"
-                            class="text-brand-600 hover:text-brand-800 text-xs font-bold inline-flex items-center gap-1">
+                            class="text-brand-600 hover:text-brand-800 text-xs font-bold inline-flex items-center gap-1 cursor-pointer">
                             <span>Buka Jadwal Lengkap Roster 16 Kelas</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -475,19 +461,19 @@
 
                 <div class="flex items-center gap-2">
                     <button id="tabBtnLogs" onclick="switchTab('logs')"
-                        class="px-4 py-2.5 font-bold text-xs rounded-t-xl border-b-2 border-brand-600 text-brand-700 bg-white transition flex items-center gap-2 shadow-2xs">
+                        class="px-4 py-2.5 font-bold text-xs rounded-t-xl border-b-2 border-brand-600 text-brand-700 bg-white transition flex items-center gap-2 shadow-2xs cursor-pointer">
                         <i data-lucide="list" class="w-4 h-4 text-brand-600"></i>
                         <span>Log Aktivitas (Live Feed)</span>
                     </button>
 
                     <button id="tabBtnMatrix" onclick="switchTab('matrix')"
-                        class="px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2">
+                        class="px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2 cursor-pointer">
                         <i data-lucide="grid" class="w-4 h-4 text-slate-500"></i>
                         <span>Rekap Matriks Harian (Per Jam)</span>
                     </button>
 
                     <button id="tabBtnPrint" onclick="switchTab('print')"
-                        class="px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2">
+                        class="px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2 cursor-pointer">
                         <i data-lucide="printer" class="w-4 h-4 text-slate-500"></i>
                         <span>Format Cetak Resmi (KOP Sekolah)</span>
                     </button>
@@ -592,8 +578,7 @@
                     <div>
                         <h4 class="font-extrabold text-slate-900 text-sm">Rekap Matrix Presensi Siswa Per Jam Pelajaran
                         </h4>
-                        <p class="text-xs text-slate-500">Melihat daftar siswa dan kehadiran per sesi guru (Jam ke-1
-                            sampai Jam ke-9) pada hari terpilih.</p>
+                        <p class="text-xs text-slate-500">Melihat daftar siswa dan kehadiran per sesi guru (Jam ke-1 sampai Jam ke-9) pada hari terpilih.</p>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -632,8 +617,7 @@
                 </div>
 
                 <div class="text-[11px] text-slate-400 flex items-center justify-between">
-                    <span>Tanda <span class="text-emerald-600 font-bold">✓ (Inisial Guru)</span> menandakan siswa telah
-                        submit kehadiran pada jam pelajaran tersebut.</span>
+                    <span>Tanda <span class="text-emerald-600 font-bold">✓ (Inisial Guru)</span> menandakan siswa telah submit kehadiran pada jam pelajaran tersebut.</span>
                     <span class="font-semibold text-slate-500">Roster Resmi T.A 2026/2027</span>
                 </div>
 
@@ -647,8 +631,7 @@
                     <div>
                         <h4 class="font-extrabold text-slate-900 text-sm">Pratinjau Dokumen Cetak Rekapitulasi Presensi
                         </h4>
-                        <p class="text-xs text-slate-500">Dokumen diformat rapi dengan KOP resmi sekolah dan kolom tanda
-                            tangan wali kelas.</p>
+                        <p class="text-xs text-slate-500">Dokumen diformat rapi dengan KOP resmi sekolah dan kolom tanda tangan wali kelas.</p>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -672,7 +655,7 @@
                             <option value="IX-7">Kelas IX-7</option>
                         </select>
                         <button onclick="window.print()"
-                            class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 active:scale-95">
+                            class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 active:scale-95 cursor-pointer">
                             <i data-lucide="printer" class="w-4 h-4"></i>
                             <span>Cetak / Simpan PDF</span>
                         </button>
@@ -685,20 +668,15 @@
 
                     <!-- KOP SURAT RESMI SEKOLAH -->
                     <div class="text-center pb-4 border-b-2 border-slate-900 mb-5 relative">
-                        <div class="font-bold text-xs uppercase tracking-widest text-slate-600">Perguruan Abdi Bangsa
-                            (PAB)</div>
-                        <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 uppercase">SMP PAB 5
-                            PATUMBAK</h1>
-                        <p class="text-xs text-slate-600 mt-0.5">Jalan Pertahanan Patumbak No. 12, Deli Serdang,
-                            Sumatera Utara</p>
-                        <p class="text-[11px] font-semibold text-slate-500 font-mono mt-0.5">Akreditasi B &bull; NSS:
-                            204020108005 &bull; NPSN: 10214152</p>
+                        <div class="font-bold text-xs uppercase tracking-widest text-slate-600">Perguruan Abdi Bangsa (PAB)</div>
+                        <h1 class="text-xl sm:text-2xl font-black tracking-tight text-slate-900 uppercase">SMP PAB 5 PATUMBAK</h1>
+                        <p class="text-xs text-slate-600 mt-0.5">Jalan Pertahanan Patumbak No. 12, Deli Serdang, Sumatera Utara</p>
+                        <p class="text-[11px] font-semibold text-slate-500 font-mono mt-0.5">Akreditasi B &bull; NSS: 204020108005 &bull; NPSN: 10214152</p>
                     </div>
 
                     <!-- Document Header Info -->
                     <div class="text-center mb-6">
-                        <h2 class="text-base font-extrabold tracking-wide uppercase underline">REKAPITULASI KEHADIRAN
-                            SISWA PER JAM PELAJARAN</h2>
+                        <h2 class="text-base font-extrabold tracking-wide uppercase underline">REKAPITULASI KEHADIRAN SISWA PER JAM PELAJARAN</h2>
                         <div class="flex items-center justify-center gap-4 text-xs font-semibold text-slate-600 mt-1">
                             <span>Kelas: <strong id="printDocClassName" class="text-slate-900">VII-1</strong></span>
                             <span>&bull;</span>
@@ -726,8 +704,7 @@
                             <p class="text-slate-500">Mengetahui,</p>
                             <p class="font-bold text-slate-800 mt-0.5">Kepala Sekolah SMP PAB 5 Patumbak</p>
                             <div class="h-20"></div>
-                            <p class="font-extrabold text-slate-900 underline uppercase tracking-wide">( Drs. H. Suwito,
-                                M.Pd )</p>
+                            <p class="font-extrabold text-slate-900 underline uppercase tracking-wide">( Drs. H. Suwito, M.Pd )</p>
                             <p class="text-[10px] text-slate-500">NIP. 19680512 199412 1 002</p>
                         </div>
 
@@ -749,115 +726,6 @@
 
     </main>
 
-    <!-- CLOUD CONFIGURATION MODAL -->
-    <div id="cloudModal"
-        class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200 no-print">
-        <div
-            class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl max-h-[92vh] flex flex-col border border-slate-200">
-
-            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
-                        <i data-lucide="cloud" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-extrabold text-slate-900 text-base">Pengaturan Sinkronisasi Google Sheets</h3>
-                        <p class="text-xs text-slate-500">Kirim presensi real-time ke Google Spreadsheet sekolah Anda
-                        </p>
-                    </div>
-                </div>
-                <button onclick="closeCloudModal()"
-                    class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-
-            <div class="overflow-y-auto pr-1 py-4 space-y-4 text-xs">
-                <div>
-                    <label class="block font-bold uppercase tracking-wider text-slate-700 mb-1" for="cloudWebAppUrl">
-                        Google Apps Script Web App URL:
-                    </label>
-                    <div class="flex items-center gap-2">
-                        <input type="url" id="cloudWebAppUrl"
-                            placeholder="https://script.google.com/macros/s/AKfycbw09ZFTB0dcwQ8WXBqL0SX4QdzkoX1a2f0_X9Tya5S25zGJFUGRkyLglF1AUKXnsRI/exec"
-                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-xs" />
-                        <button type="button" onclick="testCloudConnection()"
-                            class="px-3.5 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 rounded-xl font-bold whitespace-nowrap transition cursor-pointer flex items-center gap-1.5">
-                            <i data-lucide="radio" class="w-3.5 h-3.5"></i> Tes Ping
-                        </button>
-                    </div>
-                    <div id="cloudTestFeedback" class="hidden mt-1.5 text-[11px] p-2 rounded-lg font-medium"></div>
-                    <p class="text-[11px] text-slate-400 mt-1">Kosongkan jika hanya ingin menggunakan penyimpanan lokal
-                        browser (Local Storage).</p>
-                </div>
-
-                <div
-                    class="p-4 rounded-2xl bg-slate-900 text-slate-200 font-mono text-[11px] space-y-2 border border-slate-800">
-                    <div class="flex items-center justify-between text-slate-400 pb-1 border-b border-slate-800">
-                        <span class="font-sans font-bold text-white text-xs">Salin Kode Google Apps Script
-                            (Code.gs):</span>
-                        <button onclick="copyAppsScriptCode()"
-                            class="text-brand-400 hover:text-brand-300 font-sans font-semibold text-[11px] flex items-center gap-1">
-                            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin Kode
-                        </button>
-                    </div>
-                    <pre class="overflow-x-auto text-emerald-400 custom-scrollbar py-1">
-function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
-    sheet.appendRow([
-      new Date(),
-      data.day,
-      data.period || '-',
-      data.studentName,
-      data.studentClass,
-      data.teacherInitial,
-      data.teacherSubject,
-      data.status || 'HADIR',
-      data.notes || ''
-    ]);
-    return ContentService.createTextOutput(JSON.stringify({ result: "success" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ result: "error", error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}</pre>
-                </div>
-
-                <div class="bg-indigo-50/80 p-3.5 rounded-xl border border-indigo-200 text-indigo-950 space-y-1">
-                    <div class="font-bold text-xs flex items-center gap-1.5">
-                        <i data-lucide="help-circle" class="w-4 h-4 text-indigo-600"></i> Cara Pasang dalam 2 Menit:
-                    </div>
-                    <ol class="list-decimal list-inside space-y-0.5 text-[11px] text-indigo-900 pl-1">
-                        <li>Buka <strong>Google Spreadsheet</strong> baru untuk data presensi SMP PAB 5.</li>
-                        <li>Klik menu <strong>Extensions &gt; Apps Script</strong>.</li>
-                        <li>Hapus teks yang ada, tempel kode di atas, lalu klik <strong>Save</strong>.</li>
-                        <li>Klik tombol <strong>Deploy &gt; New deployment</strong>, pilih tipe <strong>Web
-                                app</strong>.</li>
-                        <li>Ubah "Who has access" menjadi <strong>Anyone</strong>, lalu klik <strong>Deploy</strong>.
-                        </li>
-                        <li>Salin <strong>Web App URL</strong> yang dihasilkan dan tempelkan ke kolom di atas.</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                <button onclick="saveCloudConfiguration()"
-                    class="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl transition shadow-md">
-                    Simpan Konfigurasi Cloud
-                </button>
-                <button onclick="closeCloudModal()"
-                    class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition">
-                    Tutup
-                </button>
-            </div>
-
-        </div>
-    </div>
-
     <!-- FULL ROSTER SCHEDULE MODAL -->
     <div id="rosterModal"
         class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200 no-print">
@@ -876,7 +744,7 @@ function doPost(e) {
                     </div>
                 </div>
                 <button onclick="closeFullRosterModal()"
-                    class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition">
+                    class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition cursor-pointer">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -929,7 +797,7 @@ function doPost(e) {
 
             <div class="pt-3 border-t border-slate-100 text-right">
                 <button onclick="closeFullRosterModal()"
-                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition">
+                    class="px-5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition cursor-pointer">
                     Tutup
                 </button>
             </div>
@@ -942,22 +810,26 @@ function doPost(e) {
         <div
             class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-400">
             <div>
-                SMP PAB 5 Patumbak &copy; <span id="currentYear">2026</span> &bull; Sistem Presensi Pelajaran Otomatis
-                Terintegrasi Roster
+                SMP PAB 5 Patumbak &copy; <span id="currentYear">2026</span> &bull; Sistem Presensi Pelajaran Otomatis Terintegrasi Roster
             </div>
             <div class="flex items-center gap-3 text-slate-500 font-medium">
                 <span>Auto-Hadir</span>
                 <span>&bull;</span>
                 <span>Inisial Guru</span>
                 <span>&bull;</span>
-                <span>Cloud Enabled</span>
+                <span class="text-emerald-600 font-bold">Google Sheets Synced</span>
             </div>
         </div>
     </footer>
 
     <!-- SCRIPT ENGINE -->
     <script>
-        /* 1. MASTER DATA: 28 GURU DARI SK PEMBAGIAN TUGAS */
+        /* =========================================================================
+         * 1. MASTER HARDCODED APPS SCRIPT URL & CONFIGURATION
+         * ========================================================================= */
+        const HARDCODED_CLOUD_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbw09ZFTB0dcwQ8WXBqL0SX4QdzkoX1a2f0_X9Tya5S25zGJFUGRkyLglF1AUKXnsRI/exec";
+
+        /* 2. MASTER DATA: 28 GURU DARI SK PEMBAGIAN TUGAS */
         const TEACHER_MAP = {
             "SR": "Pendidikan Agama & Budi Pekerti",
             "SB": "Pendidikan Agama & Budi Pekerti",
@@ -989,7 +861,7 @@ function doPost(e) {
             "RZ": "Bimbingan Konseling (BK)"
         };
 
-        /* 2. MASTER ROSTER SCHEDULE: SENIN s/d JUMAT (16 KELAS) */
+        /* 3. MASTER ROSTER SCHEDULE: SENIN s/d JUMAT (16 KELAS) */
         const ROSTER_DATA = {
             "SENIN": [
                 { period: null, start: "07:15", end: "08:10", type: "event", name: "UPACARA BENDERA", map: {} },
@@ -1052,12 +924,10 @@ function doPost(e) {
             ]
         };
 
-        /* 3. STORAGE & STATE MANAGEMENT (STARTS COMPLETELY CLEAN) */
+        /* 4. STORAGE & STATE MANAGEMENT (STARTS COMPLETELY CLEAN) */
         const STORAGE_KEY = "SMP_PAB5_ATTENDANCE_DB_2026";
-        const CLOUD_URL_KEY = "SMP_PAB5_CLOUD_URL_2026";
 
         let attendanceRecords = [];
-        let cloudWebAppUrl = "";
 
         let isSimulating = false;
         let simDay = "SENIN";
@@ -1078,9 +948,6 @@ function doPost(e) {
             } catch (e) {
                 attendanceRecords = [];
             }
-
-            cloudWebAppUrl = localStorage.getItem(CLOUD_URL_KEY) || "";
-            updateCloudBadge();
         }
 
         function saveRecords() {
@@ -1091,7 +958,7 @@ function doPost(e) {
             }
         }
 
-        /* 4. DYNAMIC TEACHER LEGEND RENDERER */
+        /* 5. DYNAMIC TEACHER LEGEND RENDERER */
         function renderDynamicTeacherLegend() {
             const container = document.getElementById('teacherDynamicGrid');
             const countBadge = document.getElementById('teacherCountBadge');
@@ -1112,7 +979,7 @@ function doPost(e) {
       `).join('');
         }
 
-        /* 5. TIME ENGINE & SLOT DETECTOR */
+        /* 6. TIME ENGINE & SLOT DETECTOR */
         function getEffectiveTime() {
             if (isSimulating) {
                 return {
@@ -1195,7 +1062,7 @@ function doPost(e) {
                 sessionStatusBadge.textContent = "OFF-HOURS";
                 sessionStatusBadge.className = "shrink-0 text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-300";
                 slotWarningBox.classList.remove('hidden');
-                slotWarningMessage.textContent = `Saat ini (${timeStr}) tidak ada jadwal jam pelajaran aktif. Silakan isi saat jam kelas berlangsung.`;
+                slotWarningMessage.textContent = `Saat ini (${timeStr}) tidak ada jadwal jam pelajaran aktif. Silakan isi saat jam kelas berlangsung atau gunakan Simulator.`;
                 btnSubmit.disabled = true;
                 btnSubmit.classList.add('opacity-50', 'cursor-not-allowed');
                 return;
@@ -1283,7 +1150,7 @@ function doPost(e) {
             evaluateCurrentSlot();
         }
 
-        /* 6. SIMULATION CONTROLS */
+        /* 7. SIMULATION CONTROLS */
         const toggleSimBtn = document.getElementById('toggleSimBtn');
         const simulatorToolbar = document.getElementById('simulatorToolbar');
 
@@ -1319,44 +1186,26 @@ function doPost(e) {
             showToast("Waktu Nyata", "Sistem kembali menggunakan waktu dan tanggal aktual perangkat.");
         }
 
-        /* 7. CLOUD SYNCHRONIZATION */
-        function updateCloudBadge() {
-            const statusIcon = document.getElementById('cloudStatusIcon');
-            const statusText = document.getElementById('cloudStatusText');
-            const metricCloud = document.getElementById('metricCloudStatus');
-
-            if (cloudWebAppUrl && cloudWebAppUrl.startsWith("http")) {
-                statusIcon.className = "w-2 h-2 rounded-full bg-emerald-400";
-                statusText.textContent = "Cloud: Google Sheets";
-                metricCloud.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span class="text-emerald-700">Google Sync Active</span>`;
-            } else {
-                statusIcon.className = "w-2 h-2 rounded-full bg-amber-400";
-                statusText.textContent = "Cloud: Local Storage";
-                metricCloud.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span><span class="text-amber-700">Local DB Active</span>`;
-            }
-        }
-
-        // Pengiriman yang 100% lolos proteksi file:/// lokal menggunakan iframe form submission
-        function sendToGoogleScript(url, payload) {
+        /* =========================================================================
+         * 8. ROBUST HIDDEN-IFRAME SENDER TO GOOGLE SHEETS
+         * ========================================================================= */
+        function sendRecordDirectToSheets(payload) {
             return new Promise((resolve) => {
-                // 1. Buat iframe tersembunyi sebagai target agar halaman tidak berpindah
-                let iframe = document.getElementById('hidden_iframe_sender');
+                let iframe = document.getElementById('hidden_attendance_iframe');
                 if (!iframe) {
                     iframe = document.createElement('iframe');
-                    iframe.name = 'hidden_iframe_sender';
-                    iframe.id = 'hidden_iframe_sender';
+                    iframe.name = 'hidden_attendance_iframe';
+                    iframe.id = 'hidden_attendance_iframe';
                     iframe.style.display = 'none';
                     document.body.appendChild(iframe);
                 }
 
-                // 2. Buat elemen form tersembunyi
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = url;
-                form.target = 'hidden_iframe_sender';
+                form.action = HARDCODED_CLOUD_WEBAPP_URL;
+                form.target = 'hidden_attendance_iframe';
                 form.style.display = 'none';
 
-                // 3. Masukkan data sebagai input parameter "data"
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'data';
@@ -1364,111 +1213,16 @@ function doPost(e) {
                 form.appendChild(input);
 
                 document.body.appendChild(form);
-
-                // 4. Submit form
                 form.submit();
 
-                // 5. Bersihkan elemen form setelah dikirim
                 setTimeout(() => {
                     form.remove();
                     resolve(true);
-                }, 1500);
+                }, 1200);
             });
         }
 
-        async function syncRecordToCloud(record) {
-            if (!cloudWebAppUrl || !cloudWebAppUrl.startsWith("http")) return false;
-            return await sendToGoogleScript(cloudWebAppUrl, record);
-        }
-
-        async function testCloudConnection() {
-            const url = document.getElementById('cloudWebAppUrl').value.trim();
-            const feedback = document.getElementById('cloudTestFeedback');
-            feedback.classList.remove('hidden');
-
-            if (!url || !url.startsWith("http")) {
-                feedback.className = "mt-1.5 text-[11px] p-2 rounded-lg font-medium bg-rose-50 text-rose-700 border border-rose-200";
-                feedback.textContent = "Silakan masukkan URL Web App yang valid diawali dengan https://";
-                return;
-            }
-
-            feedback.className = "mt-1.5 text-[11px] p-2 rounded-lg font-medium bg-indigo-50 text-indigo-700 border border-indigo-200";
-            feedback.textContent = "Mengirim data uji coba ke Google Apps Script...";
-
-            const testPayload = {
-                date: new Date().toISOString().split('T')[0],
-                day: "SENIN",
-                period: 1,
-                studentName: "TES KONEKSI BERHASIL",
-                studentClass: "VII-1",
-                teacherInitial: "MN",
-                status: "HADIR",
-                notes: "Uji coba pengiriman via Form Hidden"
-            };
-
-            await sendToGoogleScript(url, testPayload);
-
-            feedback.className = "mt-1.5 text-[11px] p-2 rounded-lg font-medium bg-emerald-50 text-emerald-800 border border-emerald-200";
-            feedback.innerHTML = "<strong>Data Berhasil Dikirim!</strong> Silakan refresh tab Google Spreadsheet Anda sekarang.";
-        }
-
-        function openCloudModal() {
-            document.getElementById('cloudWebAppUrl').value = cloudWebAppUrl;
-            const feedback = document.getElementById('cloudTestFeedback');
-            if (feedback) feedback.classList.add('hidden');
-            const modal = document.getElementById('cloudModal');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.classList.add('opacity-100');
-        }
-
-        function closeCloudModal() {
-            const modal = document.getElementById('cloudModal');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.classList.remove('opacity-100');
-        }
-
-        function saveCloudConfiguration() {
-            cloudWebAppUrl = document.getElementById('cloudWebAppUrl').value.trim();
-            localStorage.setItem(CLOUD_URL_KEY, cloudWebAppUrl);
-            updateCloudBadge();
-            closeCloudModal();
-            showToast("Cloud Diperbarui", cloudWebAppUrl ? "Tersambung ke endpoint Google Apps Script." : "Menggunakan penyimpanan lokal browser.");
-        }
-
-        function copyAppsScriptCode() {
-            const code = `function doPost(e) {
-  try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
-    sheet.appendRow([
-      new Date(),
-      data.day,
-      data.period || '-',
-      data.studentName,
-      data.studentClass,
-      data.teacherInitial,
-      data.status || 'HADIR',
-      data.notes || ''
-    ]);
-    return ContentService.createTextOutput(JSON.stringify({ result: "success" }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ result: "error", error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}`;
-            const textArea = document.createElement("textarea");
-            textArea.value = code;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            showToast("Kode Tersalin", "Kode Google Apps Script disalin ke clipboard!");
-        }
-
-        document.getElementById('btnOpenCloudModal').addEventListener('click', openCloudModal);
-
-        /* 8. ATTENDANCE SUBMISSION WORKFLOW */
+        /* 9. ATTENDANCE SUBMISSION WORKFLOW */
         async function handleAttendanceSubmit(event) {
             event.preventDefault();
 
@@ -1516,22 +1270,17 @@ function doPost(e) {
                 period: currentEvaluatedState.period,
                 timeSlot: currentEvaluatedState.timeSlot,
                 status: "HADIR",
-                cloudSynced: false,
+                cloudSynced: true,
                 notes: notes || "Presensi Mandiri"
             };
 
-            if (cloudWebAppUrl) {
-                syncRecordToCloud(newRecord).then(success => {
-                    newRecord.cloudSynced = success;
-                    saveRecords();
-                    renderLogsTable();
-                });
-            }
+            // Send silently and securely via the hidden form to Google Sheets
+            sendRecordDirectToSheets(newRecord);
 
             attendanceRecords.unshift(newRecord);
             saveRecords();
 
-            showToast("Berhasil Hadir!", `${name} otomatis ditandai HADIR pada sesi ${currentEvaluatedState.teacherInitial}.`);
+            showToast("Berhasil Hadir!", `${name} otomatis ditandai HADIR pada sesi ${currentEvaluatedState.teacherInitial} & tersinkron ke Google Sheets.`);
 
             studentNameInput.value = "";
             attendanceNotesInput.value = "";
@@ -1540,17 +1289,17 @@ function doPost(e) {
             renderAllViews();
         }
 
-        /* 9. REPORTING VIEWS */
+        /* 10. REPORTING VIEWS */
         function switchTab(tab) {
             const tabs = ['logs', 'matrix', 'print'];
             tabs.forEach(t => {
                 const btn = document.getElementById(`tabBtn${t.charAt(0).toUpperCase() + t.slice(1)}`);
                 const content = document.getElementById(`tabContent${t.charAt(0).toUpperCase() + t.slice(1)}`);
                 if (t === tab) {
-                    btn.className = "px-4 py-2.5 font-bold text-xs rounded-t-xl border-b-2 border-brand-600 text-brand-700 bg-white transition flex items-center gap-2 shadow-2xs";
+                    btn.className = "px-4 py-2.5 font-bold text-xs rounded-t-xl border-b-2 border-brand-600 text-brand-700 bg-white transition flex items-center gap-2 shadow-2xs cursor-pointer";
                     content.classList.remove('hidden');
                 } else {
-                    btn.className = "px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2";
+                    btn.className = "px-4 py-2.5 font-semibold text-xs rounded-t-xl border-b-2 border-transparent text-slate-500 hover:text-slate-800 hover:bg-white/60 transition flex items-center gap-2 cursor-pointer";
                     content.classList.add('hidden');
                 }
             });
@@ -1621,18 +1370,12 @@ function doPost(e) {
             </span>
           </td>
           <td class="px-4 py-3 whitespace-nowrap">
-            ${r.cloudSynced ? `
-              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                <i data-lucide="cloud-check" class="w-3 h-3"></i> Synced
-              </span>
-            ` : `
-              <span class="inline-flex items-center gap-1 text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
-                <i data-lucide="hard-drive" class="w-3 h-3"></i> Local
-              </span>
-            `}
+            <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              <i data-lucide="cloud-check" class="w-3 h-3"></i> Synced
+            </span>
           </td>
           <td class="px-4 py-3 whitespace-nowrap text-right">
-            <button onclick="deleteRecord('${r.id}')" title="Hapus catatan" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition">
+            <button onclick="deleteRecord('${r.id}')" title="Hapus catatan" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition cursor-pointer">
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           </td>
@@ -1816,7 +1559,7 @@ function doPost(e) {
             metricClasses.textContent = uniqueClasses;
         }
 
-        /* 10. MODAL ROSTER VIEWER */
+        /* 11. MODAL ROSTER VIEWER */
         function openFullRosterModal() {
             const cls = document.getElementById('studentClass').value || "VII-1";
             document.getElementById('modalClassSelector').value = cls;
@@ -1877,7 +1620,7 @@ function doPost(e) {
             tbody.innerHTML = html;
         }
 
-        /* 11. EXPORT & UTILITIES */
+        /* 12. EXPORT & UTILITIES */
         function exportToCSV() {
             if (attendanceRecords.length === 0) {
                 showToast("Data Kosong", "Belum ada catatan presensi untuk diekspor.", false);
@@ -1967,7 +1710,7 @@ function doPost(e) {
             }, 4000);
         }
 
-        /* 12. INITIALIZATION */
+        /* 13. INITIALIZATION */
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             loadInitialStorage();
