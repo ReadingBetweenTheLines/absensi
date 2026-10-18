@@ -54,7 +54,6 @@
             .no-print,
             header,
             nav,
-            #simulatorToolbar,
             #toast,
             .action-buttons {
                 display: none !important;
@@ -95,7 +94,7 @@
 <body
     class="bg-slate-100/90 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white">
 
-    <!-- TOP HEADER & SIMULATOR BAR -->
+    <!-- TOP HEADER -->
     <header class="bg-brand-950 text-white shadow-md sticky top-0 z-40 border-b border-brand-900/80 no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3">
 
@@ -110,20 +109,19 @@
                         <h1 class="text-sm sm:text-base font-extrabold tracking-tight leading-tight">SMP PAB 5 PATUMBAK
                         </h1>
                         <span
-                            class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">T.A
-                            2026/2027</span>
+                            class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">T.A 2026/2027</span>
                     </div>
                     <p class="text-[11px] text-indigo-200/90">Sistem Presensi Otomatis Terpadu Roster Guru</p>
                 </div>
             </div>
 
-            <!-- Action Items: Cloud Status Badge, Schedule Modal, Time Simulator -->
-            <div class="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+            <!-- Header Status & Live Clock -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
 
-                <!-- Cloud Connected Status Indicator (Hardcoded) -->
+                <!-- Cloud Connected Status Indicator -->
                 <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-700/60 shadow-xs">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Google Sheets Terhubung</span>
+                    <span>Google Sheets Aktif</span>
                     <i data-lucide="cloud-check" class="w-3.5 h-3.5 ml-0.5 text-emerald-400"></i>
                 </div>
 
@@ -134,64 +132,16 @@
                     <span class="hidden sm:inline">Roster Resmi</span>
                 </button>
 
-                <!-- Live Clock & Simulated Indicator -->
-                <div
-                    class="flex items-center gap-2 bg-black/30 border border-brand-800/80 rounded-xl px-3 py-1 text-xs">
+                <!-- Live Clock (Locked to Device Real Time) -->
+                <div class="bg-black/40 border border-brand-800/80 rounded-xl px-3.5 py-1 text-xs">
                     <div class="text-right">
                         <span id="navLiveDay"
                             class="text-[10px] font-bold uppercase tracking-wider text-amber-300">SENIN</span>
                         <span id="navLiveClock"
                             class="font-mono font-extrabold text-white text-xs block leading-tight">00:00:00</span>
                     </div>
-                    <button id="toggleSimBtn" title="Buka kontrol simulasi waktu"
-                        class="p-1 rounded-lg hover:bg-brand-800/80 text-amber-300 transition cursor-pointer">
-                        <i data-lucide="sliders" class="w-4 h-4"></i>
-                    </button>
                 </div>
 
-            </div>
-        </div>
-
-        <!-- Simulator Control Dropdown Bar -->
-        <div id="simulatorToolbar" class="hidden bg-brand-900/95 border-t border-brand-800 py-2 px-4 transition-all">
-            <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-                <div class="flex items-center gap-2 text-indigo-200">
-                    <i data-lucide="clock-rewind" class="w-4 h-4 text-amber-400"></i>
-                    <span class="font-semibold text-white">Mode Simulasi Waktu:</span>
-                    <span class="text-indigo-300 hidden md:inline">Uji coba pergantian jadwal guru secara instan tanpa menunggu jam sekolah.</span>
-                </div>
-
-                <div class="flex items-center gap-2 flex-wrap">
-                    <select id="simDaySelect" onchange="applySimulation()"
-                        class="bg-brand-950 text-white border border-brand-700 rounded-lg px-2.5 py-1 text-xs font-semibold outline-none focus:ring-1 focus:ring-amber-400">
-                        <option value="SENIN">Senin</option>
-                        <option value="SELASA">Selasa</option>
-                        <option value="RABU">Rabu</option>
-                        <option value="KAMIS">Kamis</option>
-                        <option value="JUMAT">Jumat</option>
-                        <option value="SABTU">Sabtu (Libur)</option>
-                        <option value="MINGGU">Minggu (Libur)</option>
-                    </select>
-
-                    <input type="time" id="simTimeInput" value="08:15" onchange="applySimulation()"
-                        class="bg-brand-950 text-white border border-brand-700 rounded-lg px-2 py-1 text-xs font-mono font-semibold outline-none focus:ring-1 focus:ring-amber-400">
-
-                    <button type="button" onclick="applySimulationPreset('SENIN', '08:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Senin 08:30 (VII-1: MN)</button>
-                    <button type="button" onclick="applySimulationPreset('SELASA', '07:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Selasa 07:30 (VII-1: BA)</button>
-                    <button type="button" onclick="applySimulationPreset('RABU', '10:30', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Rabu 10:30 (VII-1: SB)</button>
-                    <button type="button" onclick="applySimulationPreset('KAMIS', '09:00', 'IX-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Kamis 09:00 (IX-1: DA)</button>
-                    <button type="button" onclick="applySimulationPreset('JUMAT', '08:00', 'VII-1')"
-                        class="px-2 py-1 bg-brand-800 hover:bg-brand-700 text-indigo-100 rounded text-[11px] font-medium transition cursor-pointer">Jumat 08:00 (Kokurikuler)</button>
-
-                    <button type="button" onclick="resetSimulation()"
-                        class="px-2.5 py-1 bg-rose-600/80 hover:bg-rose-600 text-white rounded text-[11px] font-bold ml-1 transition cursor-pointer">
-                        Reset Real Time
-                    </button>
-                </div>
             </div>
         </div>
     </header>
@@ -228,8 +178,7 @@
                             class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wide uppercase bg-brand-50 text-brand-700 border border-brand-200/60">
                             <i data-lucide="check-check" class="w-3.5 h-3.5"></i> Auto-Hadir Mandiri
                         </span>
-                        <h2 class="text-xl font-extrabold text-slate-900 tracking-tight mt-1">Formulir Presensi Siswa
-                        </h2>
+                        <h2 class="text-xl font-extrabold text-slate-900 tracking-tight mt-1">Formulir Presensi Siswa</h2>
                         <p class="text-xs text-slate-500">Tuliskan nama dan pilih kelas Anda. Jadwal inisial guru dideteksi otomatis berdasarkan jam aktif.</p>
                     </div>
                     <div
@@ -258,7 +207,7 @@
                         </div>
                     </div>
 
-                    <!-- Student Class Selector (All 16 Classes of SMP PAB 5) -->
+                    <!-- Student Class Selector -->
                     <div>
                         <label for="studentClass"
                             class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
@@ -313,7 +262,7 @@
                             </span>
                             <span id="cardSlotDayTag"
                                 class="text-[11px] font-bold text-slate-600 bg-white px-2 py-0.5 rounded-md border border-slate-200 font-mono">
-                                SENIN, 08:15
+                                --, --:--
                             </span>
                         </div>
 
@@ -479,17 +428,12 @@
                     </button>
                 </div>
 
-                <!-- Global Action: Export CSV & Clear -->
+                <!-- Export CSV Action Only (Clear Log button removed) -->
                 <div class="flex items-center gap-2 pb-2 sm:pb-0">
                     <button onclick="exportToCSV()"
                         class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-2xs transition active:scale-95 cursor-pointer">
                         <i data-lucide="download" class="w-3.5 h-3.5 text-brand-600"></i>
                         <span>Ekspor CSV</span>
-                    </button>
-                    <button onclick="clearAllLogs()"
-                        class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 shadow-2xs transition active:scale-95 cursor-pointer">
-                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                        <span class="hidden sm:inline">Bersihkan Log</span>
                     </button>
                 </div>
 
@@ -552,7 +496,6 @@
                                 <th class="px-4 py-3">Jam Ke</th>
                                 <th class="px-4 py-3">Status</th>
                                 <th class="px-4 py-3">Cloud Sync</th>
-                                <th class="px-4 py-3 text-right">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="logsTableBody" class="divide-y divide-slate-100 font-medium">
@@ -824,9 +767,7 @@
 
     <!-- SCRIPT ENGINE -->
     <script>
-        /* =========================================================================
-         * 1. MASTER HARDCODED APPS SCRIPT URL & CONFIGURATION
-         * ========================================================================= */
+        /* 1. MASTER HARDCODED APPS SCRIPT URL */
         const HARDCODED_CLOUD_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbw09ZFTB0dcwQ8WXBqL0SX4QdzkoX1a2f0_X9Tya5S25zGJFUGRkyLglF1AUKXnsRI/exec";
 
         /* 2. MASTER DATA: 28 GURU DARI SK PEMBAGIAN TUGAS */
@@ -924,14 +865,9 @@
             ]
         };
 
-        /* 4. STORAGE & STATE MANAGEMENT (STARTS COMPLETELY CLEAN) */
+        /* 4. STORAGE & STATE MANAGEMENT */
         const STORAGE_KEY = "SMP_PAB5_ATTENDANCE_DB_2026";
-
         let attendanceRecords = [];
-
-        let isSimulating = false;
-        let simDay = "SENIN";
-        let simTime = "08:15";
 
         let currentEvaluatedState = {
             isValidSlot: false,
@@ -979,29 +915,20 @@
       `).join('');
         }
 
-        /* 6. TIME ENGINE & SLOT DETECTOR */
+        /* 6. STRICT REAL TIME ENGINE */
         function getEffectiveTime() {
-            if (isSimulating) {
-                return {
-                    dayName: simDay,
-                    timeStr: simTime,
-                    timeWithSeconds: `${simTime}:00`,
-                    dateStr: "2026-10-19"
-                };
-            } else {
-                const now = new Date();
-                const days = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
-                const dayName = days[now.getDay()];
-                const h = String(now.getHours()).padStart(2, '0');
-                const m = String(now.getMinutes()).padStart(2, '0');
-                const s = String(now.getSeconds()).padStart(2, '0');
-                return {
-                    dayName: dayName,
-                    timeStr: `${h}:${m}`,
-                    timeWithSeconds: `${h}:${m}:${s}`,
-                    dateStr: now.toISOString().split("T")[0]
-                };
-            }
+            const now = new Date();
+            const days = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
+            const dayName = days[now.getDay()];
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            return {
+                dayName: dayName,
+                timeStr: `${h}:${m}`,
+                timeWithSeconds: `${h}:${m}:${s}`,
+                dateStr: now.toISOString().split("T")[0]
+            };
         }
 
         function isTimeInRange(curr, start, end) {
@@ -1062,7 +989,7 @@
                 sessionStatusBadge.textContent = "OFF-HOURS";
                 sessionStatusBadge.className = "shrink-0 text-[10px] font-extrabold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-300";
                 slotWarningBox.classList.remove('hidden');
-                slotWarningMessage.textContent = `Saat ini (${timeStr}) tidak ada jadwal jam pelajaran aktif. Silakan isi saat jam kelas berlangsung atau gunakan Simulator.`;
+                slotWarningMessage.textContent = `Saat ini (${timeStr}) tidak ada jadwal jam pelajaran aktif. Silakan isi saat jam kelas berlangsung.`;
                 btnSubmit.disabled = true;
                 btnSubmit.classList.add('opacity-50', 'cursor-not-allowed');
                 return;
@@ -1112,7 +1039,7 @@
 
             if (!selectedClass) {
                 cardTeacherBadge.textContent = "?";
-                cardTeacherBadge.className = "w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center font-black text-lg tracking-wider shrink-0 shadow-md shadow-brand-600/30";
+                cardTeacherBadge.className = "w-12 h-12 rounded-xl bg-brand-600 text-white flex items-center justify-center font-black text-lg tracking-wider shrink-0 shadow-md shadow-brand-600/30 border border-brand-500";
                 cardSubjectName.textContent = "Pilih kelas Anda";
                 cardPeriodNo.textContent = `Jam ke-${activeSlot.period} (${activeSlot.start} - ${activeSlot.end})`;
                 sessionStatusBadge.textContent = "PILIH KELAS";
@@ -1145,50 +1072,12 @@
 
         function tickClock() {
             const { dayName, timeWithSeconds } = getEffectiveTime();
-            document.getElementById('navLiveDay').textContent = isSimulating ? `[SIM] ${dayName}` : dayName;
+            document.getElementById('navLiveDay').textContent = dayName;
             document.getElementById('navLiveClock').textContent = timeWithSeconds;
             evaluateCurrentSlot();
         }
 
-        /* 7. SIMULATION CONTROLS */
-        const toggleSimBtn = document.getElementById('toggleSimBtn');
-        const simulatorToolbar = document.getElementById('simulatorToolbar');
-
-        toggleSimBtn.addEventListener('click', () => {
-            simulatorToolbar.classList.toggle('hidden');
-        });
-
-        function applySimulation() {
-            isSimulating = true;
-            simDay = document.getElementById('simDaySelect').value;
-            simTime = document.getElementById('simTimeInput').value || "08:15";
-            tickClock();
-            showToast("Simulator Aktif", `Waktu dialihkan ke ${simDay} pukul ${simTime}`);
-        }
-
-        function applySimulationPreset(day, time, targetClass = null) {
-            document.getElementById('simDaySelect').value = day;
-            document.getElementById('simTimeInput').value = time;
-            if (targetClass) {
-                document.getElementById('studentClass').value = targetClass;
-            }
-            isSimulating = true;
-            simDay = day;
-            simTime = time;
-            tickClock();
-            showToast("Preset Terpasang", `${day} pukul ${time} ${targetClass ? `(${targetClass})` : ''}`);
-        }
-
-        function resetSimulation() {
-            isSimulating = false;
-            simulatorToolbar.classList.add('hidden');
-            tickClock();
-            showToast("Waktu Nyata", "Sistem kembali menggunakan waktu dan tanggal aktual perangkat.");
-        }
-
-        /* =========================================================================
-         * 8. ROBUST HIDDEN-IFRAME SENDER TO GOOGLE SHEETS
-         * ========================================================================= */
+        /* 7. SILENT GOOGLE SHEETS SENDER */
         function sendRecordDirectToSheets(payload) {
             return new Promise((resolve) => {
                 let iframe = document.getElementById('hidden_attendance_iframe');
@@ -1222,7 +1111,7 @@
             });
         }
 
-        /* 9. ATTENDANCE SUBMISSION WORKFLOW */
+        /* 8. ATTENDANCE SUBMISSION WORKFLOW */
         async function handleAttendanceSubmit(event) {
             event.preventDefault();
 
@@ -1274,13 +1163,12 @@
                 notes: notes || "Presensi Mandiri"
             };
 
-            // Send silently and securely via the hidden form to Google Sheets
             sendRecordDirectToSheets(newRecord);
 
             attendanceRecords.unshift(newRecord);
             saveRecords();
 
-            showToast("Berhasil Hadir!", `${name} otomatis ditandai HADIR pada sesi ${currentEvaluatedState.teacherInitial} & tersinkron ke Google Sheets.`);
+            showToast("Berhasil Hadir!", `${name} otomatis ditandai HADIR pada sesi ${currentEvaluatedState.teacherInitial}.`);
 
             studentNameInput.value = "";
             attendanceNotesInput.value = "";
@@ -1289,7 +1177,7 @@
             renderAllViews();
         }
 
-        /* 10. REPORTING VIEWS */
+        /* 9. REPORTING VIEWS */
         function switchTab(tab) {
             const tabs = ['logs', 'matrix', 'print'];
             tabs.forEach(t => {
@@ -1328,7 +1216,7 @@
             if (filtered.length === 0) {
                 tbody.innerHTML = `
           <tr>
-            <td colspan="8" class="text-center py-12 text-slate-400">
+            <td colspan="7" class="text-center py-12 text-slate-400">
               <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3">
                 <i data-lucide="inbox" class="w-6 h-6"></i>
               </div>
@@ -1373,11 +1261,6 @@
             <span class="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
               <i data-lucide="cloud-check" class="w-3 h-3"></i> Synced
             </span>
-          </td>
-          <td class="px-4 py-3 whitespace-nowrap text-right">
-            <button onclick="deleteRecord('${r.id}')" title="Hapus catatan" class="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 transition cursor-pointer">
-              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            </button>
           </td>
         </tr>
       `).join('');
@@ -1559,7 +1442,7 @@
             metricClasses.textContent = uniqueClasses;
         }
 
-        /* 11. MODAL ROSTER VIEWER */
+        /* 10. MODAL ROSTER VIEWER */
         function openFullRosterModal() {
             const cls = document.getElementById('studentClass').value || "VII-1";
             document.getElementById('modalClassSelector').value = cls;
@@ -1620,7 +1503,7 @@
             tbody.innerHTML = html;
         }
 
-        /* 12. EXPORT & UTILITIES */
+        /* 11. EXPORT UTILITY */
         function exportToCSV() {
             if (attendanceRecords.length === 0) {
                 showToast("Data Kosong", "Belum ada catatan presensi untuk diekspor.", false);
@@ -1643,22 +1526,6 @@
             link.click();
             document.body.removeChild(link);
             showToast("Ekspor CSV Berhasil", "File laporan presensi telah diunduh.");
-        }
-
-        function clearAllLogs() {
-            if (confirm("Apakah Anda yakin ingin menghapus seluruh log data presensi dari sistem?")) {
-                attendanceRecords = [];
-                saveRecords();
-                renderAllViews();
-                showToast("Log Dikosongkan", "Seluruh data riwayat presensi telah dibersihkan.");
-            }
-        }
-
-        function deleteRecord(id) {
-            attendanceRecords = attendanceRecords.filter(r => r.id !== id);
-            saveRecords();
-            renderAllViews();
-            showToast("Catatan Dihapus", "Log presensi siswa telah dihapus.");
         }
 
         function populateTeacherFilterDropdown() {
@@ -1710,7 +1577,7 @@
             }, 4000);
         }
 
-        /* 13. INITIALIZATION */
+        /* 12. INITIALIZATION */
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             loadInitialStorage();
