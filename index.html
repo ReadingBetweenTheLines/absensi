@@ -118,10 +118,10 @@
             <!-- Header Status & Live Clock -->
             <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
 
-                <!-- Cloud Connected Status Indicator -->
-                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-700/60 shadow-xs">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>Google Sheets Aktif</span>
+                <!-- Cloud Connected Status Indicator with Live Sync Pulse -->
+                <div id="cloudSyncStatusBadge" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-950/60 text-emerald-300 border border-emerald-700/60 shadow-xs">
+                    <span id="cloudPulseDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span id="cloudSyncText">Google Sheets Terhubung</span>
                     <i data-lucide="cloud-check" class="w-3.5 h-3.5 ml-0.5 text-emerald-400"></i>
                 </div>
 
@@ -341,7 +341,7 @@
                 <!-- Summary Metric Cards -->
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Total Hadir Hari Ini</p>
+                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Total Hadir Masuk</p>
                         <p id="metricTotalPresent" class="text-2xl sm:text-3xl font-black text-brand-600 mt-1">0</p>
                         <p class="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
                             <i data-lucide="check" class="w-3 h-3 text-emerald-500"></i> Siswa Terdata
@@ -349,7 +349,7 @@
                     </div>
 
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Kelas Aktif</p>
+                        <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Kelas Terdata</p>
                         <p id="metricUniqueClasses" class="text-2xl sm:text-3xl font-black text-indigo-600 mt-1">0</p>
                         <p class="text-[10px] text-slate-400 mt-1">Dari 16 Rombel</p>
                     </div>
@@ -364,7 +364,7 @@
                         <p class="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider">Penyimpanan</p>
                         <div class="flex items-center gap-1.5 mt-2 text-xs font-bold text-emerald-600">
                             <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                            <span>Sheets Sync</span>
+                            <span>Sheets Live</span>
                         </div>
                         <p class="text-[10px] text-slate-400 mt-1">Google Drive Terpadu</p>
                     </div>
@@ -428,8 +428,13 @@
                     </button>
                 </div>
 
-                <!-- Export CSV Action Only (Clear Log button removed) -->
+                <!-- Export CSV Action Only -->
                 <div class="flex items-center gap-2 pb-2 sm:pb-0">
+                    <button onclick="fetchRecordsFromGoogleSheets()" title="Perbarui Data dari Sheet"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition cursor-pointer">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-brand-600"></i>
+                        <span>Refresh Data</span>
+                    </button>
                     <button onclick="exportToCSV()"
                         class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 shadow-2xs transition active:scale-95 cursor-pointer">
                         <i data-lucide="download" class="w-3.5 h-3.5 text-brand-600"></i>
@@ -499,7 +504,6 @@
                             </tr>
                         </thead>
                         <tbody id="logsTableBody" class="divide-y divide-slate-100 font-medium">
-                            <!-- Dynamically populated rows -->
                         </tbody>
                     </table>
                 </div>
@@ -894,7 +898,35 @@
             }
         }
 
-        /* 5. DYNAMIC TEACHER LEGEND RENDERER */
+        /* 5. AUTO SYNC FROM GOOGLE SHEETS (POPULATES LOGS ACROSS ALL DEVICES) */
+        async function fetchRecordsFromGoogleSheets() {
+            try {
+                const pulseDot = document.getElementById('cloudPulseDot');
+                const syncText = document.getElementById('cloudSyncText');
+                if (pulseDot) pulseDot.className = "w-2 h-2 rounded-full bg-amber-400 animate-ping";
+                if (syncText) syncText.textContent = "Menyinkronkan...";
+
+                const res = await fetch(HARDCODED_CLOUD_WEBAPP_URL);
+                const json = await res.json();
+
+                if (json && json.status === "success" && Array.isArray(json.data)) {
+                    attendanceRecords = json.data;
+                    saveRecords();
+                    renderAllViews();
+                }
+
+                if (pulseDot) pulseDot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
+                if (syncText) syncText.textContent = "Google Sheets Aktif";
+            } catch (err) {
+                console.warn("Gagal menyinkronkan data Google Sheets:", err);
+                const pulseDot = document.getElementById('cloudPulseDot');
+                const syncText = document.getElementById('cloudSyncText');
+                if (pulseDot) pulseDot.className = "w-2 h-2 rounded-full bg-emerald-400";
+                if (syncText) syncText.textContent = "Google Sheets Aktif";
+            }
+        }
+
+        /* 6. DYNAMIC TEACHER LEGEND RENDERER */
         function renderDynamicTeacherLegend() {
             const container = document.getElementById('teacherDynamicGrid');
             const countBadge = document.getElementById('teacherCountBadge');
@@ -915,7 +947,7 @@
       `).join('');
         }
 
-        /* 6. STRICT REAL TIME ENGINE */
+        /* 7. STRICT REAL TIME ENGINE */
         function getEffectiveTime() {
             const now = new Date();
             const days = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
@@ -1077,7 +1109,7 @@
             evaluateCurrentSlot();
         }
 
-        /* 7. SILENT GOOGLE SHEETS SENDER */
+        /* 8. SILENT GOOGLE SHEETS SENDER */
         function sendRecordDirectToSheets(payload) {
             return new Promise((resolve) => {
                 let iframe = document.getElementById('hidden_attendance_iframe');
@@ -1111,7 +1143,7 @@
             });
         }
 
-        /* 8. ATTENDANCE SUBMISSION WORKFLOW */
+        /* 9. ATTENDANCE SUBMISSION WORKFLOW */
         async function handleAttendanceSubmit(event) {
             event.preventDefault();
 
@@ -1139,7 +1171,7 @@
                 r.date === eff.dateStr &&
                 r.studentName.toLowerCase() === name.toLowerCase() &&
                 r.studentClass === cls &&
-                r.period === currentEvaluatedState.period &&
+                String(r.period) === String(currentEvaluatedState.period) &&
                 r.teacherInitial === currentEvaluatedState.teacherInitial
             );
 
@@ -1163,8 +1195,10 @@
                 notes: notes || "Presensi Mandiri"
             };
 
+            // Kirim ke Google Sheets
             sendRecordDirectToSheets(newRecord);
 
+            // Tambahkan langsung ke memori lokal tampilan
             attendanceRecords.unshift(newRecord);
             saveRecords();
 
@@ -1175,9 +1209,12 @@
             studentNameInput.focus();
 
             renderAllViews();
+
+            // Refresh ulang data dari cloud setelah 2 detik
+            setTimeout(fetchRecordsFromGoogleSheets, 2000);
         }
 
-        /* 9. REPORTING VIEWS */
+        /* 10. REPORTING VIEWS */
         function switchTab(tab) {
             const tabs = ['logs', 'matrix', 'print'];
             tabs.forEach(t => {
@@ -1321,7 +1358,7 @@
 
                     const isPresent = classRecords.some(r =>
                         r.studentName.toLowerCase() === name.toLowerCase() &&
-                        (r.period === periodNo || (slot.type === "event" && r.teacherInitial === "KOKURIKULER"))
+                        (String(r.period) === String(periodNo) || (slot.type === "event" && r.teacherInitial === "KOKURIKULER"))
                     );
 
                     if (isPresent) {
@@ -1406,7 +1443,7 @@
                 daySlots.forEach(slot => {
                     const isPresent = classRecords.some(r =>
                         r.studentName.toLowerCase() === name.toLowerCase() &&
-                        (r.period === slot.period || (slot.type === "event" && r.teacherInitial === "KOKURIKULER"))
+                        (String(r.period) === String(slot.period) || (slot.type === "event" && r.teacherInitial === "KOKURIKULER"))
                     );
 
                     if (isPresent) {
@@ -1442,7 +1479,7 @@
             metricClasses.textContent = uniqueClasses;
         }
 
-        /* 10. MODAL ROSTER VIEWER */
+        /* 11. MODAL ROSTER VIEWER */
         function openFullRosterModal() {
             const cls = document.getElementById('studentClass').value || "VII-1";
             document.getElementById('modalClassSelector').value = cls;
@@ -1503,7 +1540,7 @@
             tbody.innerHTML = html;
         }
 
-        /* 11. EXPORT UTILITY */
+        /* 12. EXPORT UTILITY */
         function exportToCSV() {
             if (attendanceRecords.length === 0) {
                 showToast("Data Kosong", "Belum ada catatan presensi untuk diekspor.", false);
@@ -1577,7 +1614,7 @@
             }, 4000);
         }
 
-        /* 12. INITIALIZATION */
+        /* 13. INITIALIZATION & LIVE DATA POLLING */
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('currentYear').textContent = new Date().getFullYear();
             loadInitialStorage();
@@ -1587,6 +1624,12 @@
             setInterval(tickClock, 1000);
             renderAllViews();
             lucide.createIcons();
+
+            // Tarik seluruh baris presensi langsung dari Google Sheets pada saat halaman dibuka
+            fetchRecordsFromGoogleSheets();
+
+            // Sinkronisasi otomatis setiap 12 detik
+            setInterval(fetchRecordsFromGoogleSheets, 12000);
         });
     </script>
 </body>
